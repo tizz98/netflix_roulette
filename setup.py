@@ -4,9 +4,12 @@ try:
 except ImportError:
     from distutils.core import setup
 
-
-with open('README.md') as f:
-    long_description = f.read()
+try:
+    import pypandoc
+    long_description = pypandoc.convert('README.md', 'rst')
+except (IOError, ImportError):
+    with open('README.md') as f:
+        long_description = f.read()
 
 
 setup(
