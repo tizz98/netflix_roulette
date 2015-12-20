@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Netflix roulette by tizz98</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Netflix roulette</h1>
+      <h2 class="project-tagline">A simple python wrapper for the Netflix Roulette API</h2>
+      <a href="https://github.com/tizz98/netflix_roulette" class="btn">View on GitHub</a>
+      <a href="https://github.com/tizz98/netflix_roulette/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/tizz98/netflix_roulette/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="netflix-roulette" class="anchor" href="#netflix-roulette" aria-hidden="true"><span class="octicon octicon-link"></span></a>Netflix Roulette</h1>
+
+<p>This is a simple python wrapper for the <a href="http://netflixroulette.net/api/">Netflix Roulette API</a>.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<h4>
+<a id="pip" class="anchor" href="#pip" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pip</h4>
+
+<ul>
+<li><code>pip install netflix_roulette</code></li>
+</ul>
+
+<h4>
+<a id="from-source" class="anchor" href="#from-source" aria-hidden="true"><span class="octicon octicon-link"></span></a>From Source</h4>
+
+<ul>
+<li><code>git clone git@github.com:tizz98/netflix_roulette.git</code></li>
+<li><code>cd netflix_roulette</code></li>
+<li><code>python setup.py install</code></li>
+</ul>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h4>
+<a id="simple-query" class="anchor" href="#simple-query" aria-hidden="true"><span class="octicon octicon-link"></span></a>Simple Query</h4>
+
+<div class="highlight highlight-source-python"><pre><span class="pl-k">&gt;&gt;&gt;</span> <span class="pl-k">import</span> netflix_roulette
+<span class="pl-k">&gt;&gt;&gt;</span> media <span class="pl-k">=</span> netflix_roulette.NetflixMedia(<span class="pl-s"><span class="pl-pds">'</span>Attack on titan<span class="pl-pds">'</span></span>)
+<span class="pl-k">&gt;&gt;&gt;</span> media
+<span class="pl-k">&lt;</span>NetflixMedia(<span class="pl-smi">title</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>Attack on titan<span class="pl-pds">'</span></span>, <span class="pl-smi">year</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>None<span class="pl-pds">'</span></span>)<span class="pl-k">&gt;</span>
+<span class="pl-k">&gt;&gt;&gt;</span> media.show_id
+<span class="pl-c1">70299043</span>
+<span class="pl-k">&gt;&gt;&gt;</span> media.summary
+<span class="pl-s"><span class="pl-k">u</span><span class="pl-pds">'</span>For over a century, people have been living behind barricades to block out the giant Titans that threaten to destroy the human race. When a Titan destroys his hometown, young Eren Yeager becomes determined to fight back.<span class="pl-pds">'</span></span>
+<span class="pl-k">&gt;&gt;&gt;</span> media.is_on_netflix
+<span class="pl-c1">True</span>
+<span class="pl-k">&gt;&gt;&gt;</span> media.get_readable_mediatype()
+<span class="pl-s"><span class="pl-pds">'</span>TV Show<span class="pl-pds">'</span></span></pre></div>
+
+<h4>
+<a id="query-with-year" class="anchor" href="#query-with-year" aria-hidden="true"><span class="octicon octicon-link"></span></a>Query with year</h4>
+
+<div class="highlight highlight-source-python"><pre><span class="pl-k">&gt;&gt;&gt;</span> <span class="pl-k">import</span> netflix_roulette
+<span class="pl-k">&gt;&gt;&gt;</span> media <span class="pl-k">=</span> netflix_roulette.NetflixMedia(<span class="pl-s"><span class="pl-pds">'</span>The Boondocks<span class="pl-pds">'</span></span>, <span class="pl-smi">year</span><span class="pl-k">=</span><span class="pl-c1">2005</span>)
+<span class="pl-k">&gt;&gt;&gt;</span> media
+<span class="pl-k">&lt;</span>NetflixMedia(<span class="pl-smi">title</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>The Boondocks<span class="pl-pds">'</span></span>, <span class="pl-smi">year</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>2005<span class="pl-pds">'</span></span>)<span class="pl-k">&gt;</span>
+<span class="pl-k">&gt;&gt;&gt;</span> media.show_id
+<span class="pl-c1">70153391</span>
+<span class="pl-k">&gt;&gt;&gt;</span> media.summary
+<span class="pl-s"><span class="pl-k">u</span><span class="pl-pds">'</span>Based on the comic strip by Aaron McGruder, this satirical animated series follows the socially conscious misadventures of Huey Freeman, a preternaturally smart 10-year-old who relocates from inner-city Chicago to the suburbs.<span class="pl-pds">'</span></span>
+<span class="pl-k">&gt;&gt;&gt;</span> media.is_on_netflix
+<span class="pl-c1">True</span>
+<span class="pl-k">&gt;&gt;&gt;</span> media.get_readable_mediatype()
+<span class="pl-s"><span class="pl-pds">'</span>TV Show<span class="pl-pds">'</span></span></pre></div>
+
+<h2>
+<a id="class-netflixmedia" class="anchor" href="#class-netflixmedia" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>class NetflixMedia</code>
+</h2>
+
+<h4>
+<a id="parameters" class="anchor" href="#parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h4>
+
+<ul>
+<li>
+<code>title</code>: Title of the media you are searching for.</li>
+<li>
+<code>year</code>: (Optional) Year of the media you are searching for.</li>
+</ul>
+
+<h4>
+<a id="attributes" class="anchor" href="#attributes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Attributes</h4>
+
+<ul>
+<li>
+<code>rating</code>: How high the media is rated, max is 5.</li>
+<li>
+<code>poster</code>: The poster for the media, right from the Netflix CDN.</li>
+<li>
+<code>mediatype</code>: 0 means movie, 1 means TV Show. See also <code>get_readable_mediatype()</code>.</li>
+<li>
+<code>release_year</code>: The media's release date.</li>
+<li>
+<code>show_cast</code>: The cast of a given title.</li>
+<li>
+<code>category</code>: A title's given category.</li>
+<li>
+<code>summary</code>: A plot summary.</li>
+<li>
+<code>director</code>: The name(s) of the director(s) of a given title.</li>
+<li>
+<code>show_id</code>: The Netflix id of the title.</li>
+<li>
+<code>is_on_netflix</code>: A boolean, whether or not the show is on Netflix.</li>
+</ul>
+
+<h4>
+<a id="methods" class="anchor" href="#methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Methods</h4>
+
+<ul>
+<li>
+<code>get_readable_mediatype()</code>: Returns <code>TV Show</code> or <code>Movie</code> instead of <code>1</code> or <code>0</code>.</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/tizz98/netflix_roulette">Netflix roulette</a> is maintained by <a href="https://github.com/tizz98">tizz98</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
