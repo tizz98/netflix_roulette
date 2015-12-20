@@ -2,6 +2,10 @@
 This is a simple python wrapper for the [Netflix Roulette API](http://netflixroulette.net/api/).
 
 ## Installation
+#### Pip
+- `pip install netflix_roulette`
+
+#### From Source
 - `git clone git@github.com:tizz98/netflix_roulette.git`
 - `cd netflix_roulette`
 - `python setup.py install`
