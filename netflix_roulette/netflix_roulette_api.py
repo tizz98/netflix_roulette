@@ -4,7 +4,7 @@ from urllib import urlencode
 
 
 __author__ = 'Elijah <elijah@elijahwilson.me>'
-__version__ = '0.12'
+__version__ = '0.13'
 
 
 class NetflixMedia(object):
