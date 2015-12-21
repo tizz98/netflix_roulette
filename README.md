@@ -1,7 +1,7 @@
 # Netflix Roulette
 This is a simple python wrapper for the [Netflix Roulette API](http://netflixroulette.net/api/).
 
-![travis](https://api.travis-ci.org/tizz98/netflix_roulette.svg)
+[![Build Status](https://travis-ci.org/tizz98/netflix_roulette.svg?branch=master)](https://travis-ci.org/tizz98/netflix_roulette)
 
 ## Installation
 #### Pip
