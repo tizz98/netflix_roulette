@@ -20,3 +20,21 @@ def movie_test_with_year_test():
 def unicode_title_test():
     # Make sure unicode is properly encoded
     media = netflix_roulette.NetflixMedia(u'H βουλευτινα')
+
+
+def is_movie_func_test():
+    assert callable(netflix_roulette.NetflixMedia.is_movie)
+
+
+def is_tv_show_func_test():
+    assert callable(netflix_roulette.NetflixMedia.is_tv_show)
+
+
+def is_movie_media_test():
+    media = netflix_roulette.NetflixMedia('The Avengers')
+    assert media.is_movie() is True
+
+
+def is_tv_show_media_test():
+    media = netflix_roulette.NetflixMedia('The Boondocks')
+    assert media.is_tv_show() is True
