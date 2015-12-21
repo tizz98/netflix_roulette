@@ -28,7 +28,7 @@ class NetflixMedia(object):
 
     def _get_url_parameters(self):
         params = {
-            'title': self.title,
+            'title': unicode(self.title).encode('utf-8'),
         }
 
         if self.year is not None:
@@ -42,12 +42,12 @@ class NetflixMedia(object):
         try:
             response = urllib2.urlopen(url)
         except urllib2.HTTPError:
-            return {}
+            return None
 
         try:
             return json.load(response)
         except ValueError:
-            return {}
+            return None
 
     def _set_attrs_none(self):
         for attr in self.__attrs__:
@@ -56,15 +56,15 @@ class NetflixMedia(object):
     def _set_movie_data(self):
         data = self._get_movie_data()
 
-        if 'errorcode' in data:
+        if data is None:
             self._set_attrs_none()
             self.is_on_netflix = False
+        else:
+            for attr, value in data.iteritems():
+                setattr(self, attr, value)
 
-        for attr, value in data.iteritems():
-            setattr(self, attr, value)
-
-        self.is_on_netflix = True
-        self._data_set = True
+            self.is_on_netflix = True
+            self._data_set = True
 
     def get_readable_mediatype(self):
         if self._data_set:
