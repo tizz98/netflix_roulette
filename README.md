@@ -65,3 +65,5 @@ True
 
 #### Methods
 - `get_readable_mediatype()`: Returns `TV Show` or `Movie` instead of `1` or `0`.
+- `is_movie()`: Returns `True` if the media is a Movie.
+- `is_tv_show()`: Returns `True` if the media is a TV Show.
