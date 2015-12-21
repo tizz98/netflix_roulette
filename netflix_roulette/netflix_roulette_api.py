@@ -2,9 +2,8 @@ import json
 import urllib2
 from urllib import urlencode
 
-
-__author__ = 'Elijah <elijah@elijahwilson.me>'
-__version__ = '0.15'
+from constants import MEDIA_MAP, MOVIE_NETFLIX_REPR, \
+    TV_SHOW_NETFLIX_REPR
 
 
 class NetflixMedia(object):
@@ -68,5 +67,11 @@ class NetflixMedia(object):
 
     def get_readable_mediatype(self):
         if self._data_set:
-            return 'TV Show' if self.mediatype == 1 else 'Movie'
+            return MEDIA_MAP[self.mediatype]
         return ''
+
+    def is_movie(self):
+        return self.mediatype == MOVIE_NETFLIX_REPR
+
+    def is_tv_show(self):
+        return self.mediatype == TV_SHOW_NETFLIX_REPR
