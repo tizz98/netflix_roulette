@@ -1,15 +1,27 @@
 # coding=utf-8
 import netflix_roulette
+from netflix_roulette.constants import TV_SHOW_STR, MOVIE_STR
 
 
-def simple_movie_test():
+# Note: testing with specific media will prove to not be reliable
+def on_netflix_movie_test():
     media = netflix_roulette.NetflixMedia('The Avengers')
     assert media.is_on_netflix is True
 
 
-def movietype_test():
+def not_on_netflix_movie_test():
+    media = netflix_roulette.NetflixMedia('Home', year=2015)
+    assert media.is_on_netflix is False
+
+
+def movietype_tv_show_test():
     media = netflix_roulette.NetflixMedia('The Boondocks')
-    assert media.get_readable_mediatype() == 'TV Show'
+    assert media.get_readable_mediatype() == TV_SHOW_STR
+
+
+def movietype_movie_test():
+    media = netflix_roulette.NetflixMedia('The Avengers')
+    assert media.get_readable_mediatype() == MOVIE_STR
 
 
 def movie_test_with_year_test():
