@@ -14,11 +14,11 @@ except (IOError, ImportError):
 
 setup(
     name='netflix_roulette',
-    version='0.14',
+    version='0.15',
     description='A simple python wrapper for the Netflix Roulette API',
     long_description=long_description,
     url='https://github.com/tizz98/netflix_roulette',
-    download_url='https://github.com/tizz98/netflix_roulette/tarball/0.14',
+    download_url='https://github.com/tizz98/netflix_roulette/tarball/0.15',
     author='Elijah Wilson',
     author_email='elijah@elijahwilson.me',
     license='GNU General Public License v3.0',
