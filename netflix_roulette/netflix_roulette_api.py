@@ -4,7 +4,7 @@ from urllib import urlencode
 
 
 __author__ = 'Elijah <elijah@elijahwilson.me>'
-__version__ = '0.13'
+__version__ = '0.14'
 
 
 class NetflixMedia(object):
@@ -38,11 +38,16 @@ class NetflixMedia(object):
 
     def _get_movie_data(self):
         url = '{0}?{1}'.format(self._api_url, self._get_url_parameters())
-        response = urllib2.urlopen(url)
+
+        try:
+            response = urllib2.urlopen(url)
+        except urllib2.HTTPError:
+            return {}
+
         try:
             return json.load(response)
         except ValueError:
-            return None
+            return {}
 
     def _set_attrs_none(self):
         for attr in self.__attrs__:
