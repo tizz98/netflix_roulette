@@ -62,7 +62,7 @@ class NetflixMedia(Element):
 
 
 class PersonWithMedia(Element):
-    __attrs__ = ['movies']
+    __attrs__ = ['media']
 
     repr_data_items = [
         'name',
@@ -80,7 +80,7 @@ class PersonWithMedia(Element):
         response = Request(**{self.url_query_param: self.name})
         data = response.json()
 
-        self.movies = [
+        self.media = [
             self.media_cls(media) for media in data
         ]
 
