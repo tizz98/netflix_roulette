@@ -52,6 +52,8 @@ True
 - `year`: (Optional) Year of the media you are searching for.
 
 #### Attributes
+- `title`: User supplied title of the media you are searching for.
+- `year`: User supplied year of the media you are searching for.
 - `rating`: How high the media is rated, max is 5.
 - `poster`: The poster for the media, right from the Netflix CDN.
 - `mediatype`: 0 means movie, 1 means TV Show. See also `get_readable_mediatype()`.
@@ -67,3 +69,23 @@ True
 - `get_readable_mediatype()`: Returns `TV Show` or `Movie` instead of `1` or `0`.
 - `is_movie()`: Returns `True` if the media is a Movie.
 - `is_tv_show()`: Returns `True` if the media is a TV Show.
+
+
+## `class NetflixDirector`
+
+#### Parameters
+- `name`: Name of the director you are searching for.
+
+#### Attributes
+- `name`: User supplied name.
+- `media`: List of `NetflixMedia` that the person has directed.
+
+
+## `class NetflixActor`
+
+#### Parameters
+- `name`: Name of the actor you are searching for.
+
+#### Attributes
+- `name`: User supplied name.
+- `media`: List of `NetflixMedia` that the person has been in.
