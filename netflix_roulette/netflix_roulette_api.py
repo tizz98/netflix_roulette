@@ -1,69 +1,53 @@
-import json
-import urllib2
-from urllib import urlencode
-
+from util import Element
+from request import Request
 from constants import MEDIA_MAP, MOVIE_NETFLIX_REPR, \
     TV_SHOW_NETFLIX_REPR
 
 
-class NetflixMedia(object):
+class NetflixMedia(Element):
     __attrs__ = [
         'rating', 'poster', 'mediatype', 'release_year', 'show_cast',
         'category', 'summary', 'director', 'show_id', 'is_on_netflix'
     ]
 
-    _api_url = 'http://netflixroulette.net/api/api.php'
-    _data_set = False
+    repr_data_items = [
+        'title',
+        'year',
+    ]
 
-    def __init__(self, title, year=None):
+    def __init__(self, title, year=None, **kwargs):
         self.title = title
         self.year = year
+        self.kwargs = kwargs
 
-        self._set_movie_data()
+        if not self.kwargs:
+            super(NetflixMedia, self).__init__()
+        else:
+            self._set_data(kwargs)
 
-    def __repr__(self):
-        return "<NetflixMedia(title='{0}', year='{1}')>".format(
-            self.title, self.year)
+    def _set_data(self, data_dict):
+        for attr, value in data_dict.iteritems():
+            setattr(self, attr, value)
 
-    def _get_url_parameters(self):
+    def _populate(self):
         params = {
-            'title': unicode(self.title).encode('utf-8'),
+            'title': self.title,
         }
 
-        if self.year is not None:
+        if self.year:
             params['year'] = self.year
 
-        return urlencode(params)
+        response = Request(**params)
+        data = response.json()
 
-    def _get_movie_data(self):
-        url = '{0}?{1}'.format(self._api_url, self._get_url_parameters())
-
-        try:
-            response = urllib2.urlopen(url)
-        except urllib2.HTTPError:
-            return None
-
-        try:
-            return json.load(response)
-        except ValueError:
-            return None
-
-    def _set_attrs_none(self):
-        for attr in self.__attrs__:
-            setattr(self, attr, None)
-
-    def _set_movie_data(self):
-        data = self._get_movie_data()
-
-        if data is None:
+        if 'errorcode' in data:
             self._set_attrs_none()
             self.is_on_netflix = False
         else:
-            for attr, value in data.iteritems():
-                setattr(self, attr, value)
-
+            self._set_data(data)
             self.is_on_netflix = True
-            self._data_set = True
+
+        super(NetflixMedia, self)._populate()
 
     def get_readable_mediatype(self):
         if self._data_set:
@@ -75,3 +59,37 @@ class NetflixMedia(object):
 
     def is_tv_show(self):
         return self.mediatype == TV_SHOW_NETFLIX_REPR
+
+
+class PersonWithMedia(Element):
+    __attrs__ = ['media']
+
+    repr_data_items = [
+        'name',
+    ]
+
+    url_query_param = ''
+    media_cls = NetflixMedia
+
+    def __init__(self, name):
+        self.name = name
+
+        super(PersonWithMedia, self).__init__()
+
+    def _populate(self):
+        response = Request(**{self.url_query_param: self.name})
+        data = response.json()
+
+        self.media = [
+            self.media_cls(media) for media in data
+        ]
+
+        super(PersonWithMedia, self)._populate()
+
+
+class NetflixDirector(PersonWithMedia):
+    url_query_param = 'director'
+
+
+class NetflixActor(PersonWithMedia):
+    url_query_param = 'actor'
