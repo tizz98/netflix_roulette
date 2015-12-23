@@ -2,7 +2,7 @@ import json
 import urllib2
 from urllib import urlencode
 
-from exceptions import NetflixRouletteHTTPError
+from .exceptions import NetflixRouletteHTTPError
 
 
 class Request(urllib2.Request):

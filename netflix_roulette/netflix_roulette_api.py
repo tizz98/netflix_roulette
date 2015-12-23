@@ -1,6 +1,6 @@
-from util import Element
-from request import Request
-from constants import MEDIA_MAP, MOVIE_NETFLIX_REPR, \
+from .util import Element
+from .request import Request
+from .constants import MEDIA_MAP, MOVIE_NETFLIX_REPR, \
     TV_SHOW_NETFLIX_REPR
 
 
