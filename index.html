@@ -24,6 +24,8 @@
 
 <p>This is a simple python wrapper for the <a href="http://netflixroulette.net/api/">Netflix Roulette API</a>.</p>
 
+<p><a href="https://travis-ci.org/tizz98/netflix_roulette"><img src="https://travis-ci.org/tizz98/netflix_roulette.svg?branch=master" alt="Build Status"></a></p>
+
 <h2>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
@@ -97,6 +99,10 @@
 
 <ul>
 <li>
+<code>title</code>: User supplied title of the media you are searching for.</li>
+<li>
+<code>year</code>: User supplied year of the media you are searching for.</li>
+<li>
 <code>rating</code>: How high the media is rated, max is 5.</li>
 <li>
 <code>poster</code>: The poster for the media, right from the Netflix CDN.</li>
@@ -124,6 +130,54 @@
 <ul>
 <li>
 <code>get_readable_mediatype()</code>: Returns <code>TV Show</code> or <code>Movie</code> instead of <code>1</code> or <code>0</code>.</li>
+<li>
+<code>is_movie()</code>: Returns <code>True</code> if the media is a Movie.</li>
+<li>
+<code>is_tv_show()</code>: Returns <code>True</code> if the media is a TV Show.</li>
+</ul>
+
+<h2>
+<a id="class-netflixdirector" class="anchor" href="#class-netflixdirector" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>class NetflixDirector</code>
+</h2>
+
+<h4>
+<a id="parameters-1" class="anchor" href="#parameters-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h4>
+
+<ul>
+<li>
+<code>name</code>: Name of the director you are searching for.</li>
+</ul>
+
+<h4>
+<a id="attributes-1" class="anchor" href="#attributes-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Attributes</h4>
+
+<ul>
+<li>
+<code>name</code>: User supplied name.</li>
+<li>
+<code>media</code>: List of <code>NetflixMedia</code> that the person has directed.</li>
+</ul>
+
+<h2>
+<a id="class-netflixactor" class="anchor" href="#class-netflixactor" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>class NetflixActor</code>
+</h2>
+
+<h4>
+<a id="parameters-2" class="anchor" href="#parameters-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h4>
+
+<ul>
+<li>
+<code>name</code>: Name of the actor you are searching for.</li>
+</ul>
+
+<h4>
+<a id="attributes-2" class="anchor" href="#attributes-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Attributes</h4>
+
+<ul>
+<li>
+<code>name</code>: User supplied name.</li>
+<li>
+<code>media</code>: List of <code>NetflixMedia</code> that the person has been in.</li>
 </ul>
 
       <footer class="site-footer">
