@@ -26,7 +26,7 @@ class NetflixMedia(Element):
             self._set_data(kwargs)
 
     def _set_data(self, data_dict):
-        for attr, value in data_dict.iteritems():
+        for attr, value in data_dict.items():
             setattr(self, attr, value)
 
     def _populate(self):
