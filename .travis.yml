@@ -6,5 +6,6 @@ install:
     - "pip install ."
     - "pip install -r requirements-dev.txt"
 script:
-  - "flake8 netflix_roulette/netflix_roulette_api.py"
-  - "py.test tests/simple.py"
+  - "flake8 --exclude=__init__.py netflix_roulette"
+  - "py.test tests/media.py"
+  - "py.test tests/person.py"
