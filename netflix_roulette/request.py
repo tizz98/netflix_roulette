@@ -1,11 +1,22 @@
+import six
 import json
-import urllib2
-from urllib import urlencode
+
+if six.PY2:
+    from urllib2 import Request as UrllibRequest
+    from urllib2 import urlopen
+    from urllib2 import HTTPError
+    from urllib import urlencode
+elif six.PY3:
+    from urllib.request import Request as UrllibRequest
+    from urllib.request import urlopen
+    from urllib.error import HTTPError
+    from urllib.parse import urlencode
+    unicode = str
 
 from .exceptions import NetflixRouletteHTTPError
 
 
-class Request(urllib2.Request):
+class Request(UrllibRequest):
     _base_url = "http://netflixroulette.net/api/api.php"
 
     def __init__(self, **kwargs):
@@ -17,23 +28,20 @@ class Request(urllib2.Request):
 
         url = '{0}?{1}'.format(self._base_url, urlencode(kwargs))
 
-        urllib2.Request.__init__(self, url)
+        UrllibRequest.__init__(self, url)
         self.add_header('Accept', 'application/json')
         self.lifetime = 3600  # 1 hour
 
-    def add_data(self, data):
-        urllib2.Request.add_data(self, urlencode(data))
-
     def open(self):
         try:
-            return urllib2.urlopen(self)
-        except urllib2.HTTPError, e:
+            return urlopen(self)
+        except HTTPError as e:
             raise NetflixRouletteHTTPError(e)
 
     def json(self):
         try:
-            data = json.load(self.open())
-        except NetflixRouletteHTTPError, e:
+            data = json.loads(self.open().read().decode('utf-8'))
+        except NetflixRouletteHTTPError as e:
             try:
                 data = json.loads(e.response)
             except:
