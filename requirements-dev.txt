@@ -1,4 +1,5 @@
 flake8==2.5.1
+importlib==1.0.3
 pandoc==1.0.0a8
 pypandoc==1.1.2
 pytest==2.8.5
