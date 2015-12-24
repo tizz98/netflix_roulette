@@ -87,6 +87,7 @@ class PersonWithMedia(Element):
             self.media = [
                 self.media_cls(media) for media in data
             ]
+            self.is_on_netflix = True
 
         super(PersonWithMedia, self)._populate()
 

@@ -5,6 +5,7 @@ import netflix_roulette
 def test_director_name():
     director = netflix_roulette.NetflixDirector('Quentin Tarantino')
     assert director.name == 'Quentin Tarantino'
+    assert director.is_on_netflix is True
 
 
 def test_director_movies():
