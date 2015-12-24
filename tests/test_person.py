@@ -2,12 +2,12 @@
 import netflix_roulette
 
 
-def director_name_test():
+def test_director_name():
     director = netflix_roulette.NetflixDirector('Quentin Tarantino')
     assert director.name == 'Quentin Tarantino'
 
 
-def director_movies_test():
+def test_director_movies():
     director = netflix_roulette.NetflixDirector('Quentin Tarantino')
     assert director.media is not None and director.media is not []
 
@@ -16,12 +16,12 @@ def director_movies_test():
         assert media._data_set is True
 
 
-def actor_name_test():
+def test_actor_name():
     actor = netflix_roulette.NetflixActor('Nicolas Cage')
     assert actor.name == 'Nicolas Cage'
 
 
-def actor_movies_test():
+def test_actor_movies():
     actor = netflix_roulette.NetflixActor('Nicolas Cage')
     assert actor.media is not None and actor.media is not []
 
