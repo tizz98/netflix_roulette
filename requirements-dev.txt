@@ -1,5 +1,6 @@
 flake8==2.5.1
+pandoc==1.0.0a8
 pypandoc==1.1.2
 pytest==2.8.5
-tox==2.3.1
 six==1.10.0
+tox==2.3.1
