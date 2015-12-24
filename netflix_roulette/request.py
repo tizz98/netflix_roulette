@@ -1,11 +1,11 @@
+import six
 import json
-import urllib2
-from urllib import urlencode
+from six.moves import urllib
 
-from exceptions import NetflixRouletteHTTPError
+from . import exceptions
 
 
-class Request(urllib2.Request):
+class Request(urllib.request.Request):
     _base_url = "http://netflixroulette.net/api/api.php"
 
     def __init__(self, **kwargs):
@@ -13,30 +13,33 @@ class Request(urllib2.Request):
         kwargs = {}
 
         for k, v in self._kwargs.items():
-            kwargs[k] = unicode(v).encode('utf-8')
+            # Make sure we only encode strings but NOT unicode
+            if not isinstance(v, six.text_type) \
+               and isinstance(v, six.string_types):
+                v = six.u(v).encode('utf-8')
 
-        url = '{0}?{1}'.format(self._base_url, urlencode(kwargs))
+            kwargs[k] = v
 
-        urllib2.Request.__init__(self, url)
+        url = '{0}?{1}'.format(self._base_url, urllib.parse.urlencode(kwargs))
+
+        urllib.request.Request.__init__(self, url)
         self.add_header('Accept', 'application/json')
         self.lifetime = 3600  # 1 hour
 
-    def add_data(self, data):
-        urllib2.Request.add_data(self, urlencode(data))
-
     def open(self):
         try:
-            return urllib2.urlopen(self)
-        except urllib2.HTTPError, e:
-            raise NetflixRouletteHTTPError(e)
+            return urllib.request.urlopen(self)
+        except urllib.error.HTTPError as e:
+            raise exceptions.NetflixRouletteHTTPError(e)
 
     def json(self):
         try:
-            data = json.load(self.open())
-        except NetflixRouletteHTTPError, e:
+            fp = self.open()
+            data = json.loads(fp.read().decode('utf-8'))
+        except exceptions.NetflixRouletteHTTPError as e:
             try:
-                data = json.loads(e.response)
-            except:
-                raise e
+                data = json.loads(e.response.decode('utf-8'))
+            except Exception as e:
+                raise exceptions.NetflixRouletteError(e)
 
         return data

@@ -1,6 +1,6 @@
-from util import Element
-from request import Request
-from constants import MEDIA_MAP, MOVIE_NETFLIX_REPR, \
+from .util import Element
+from .request import Request
+from .constants import MEDIA_MAP, MOVIE_NETFLIX_REPR, \
     TV_SHOW_NETFLIX_REPR
 
 
@@ -26,7 +26,7 @@ class NetflixMedia(Element):
             self._set_data(kwargs)
 
     def _set_data(self, data_dict):
-        for attr, value in data_dict.iteritems():
+        for attr, value in data_dict.items():
             setattr(self, attr, value)
 
     def _populate(self):
@@ -62,7 +62,7 @@ class NetflixMedia(Element):
 
 
 class PersonWithMedia(Element):
-    __attrs__ = ['media']
+    __attrs__ = ['media', 'is_on_netflix']
 
     repr_data_items = [
         'name',
@@ -80,9 +80,14 @@ class PersonWithMedia(Element):
         response = Request(**{self.url_query_param: self.name})
         data = response.json()
 
-        self.media = [
-            self.media_cls(media) for media in data
-        ]
+        if 'errorcode' in data:
+            self.media = []
+            self.is_on_netflix = False
+        else:
+            self.media = [
+                self.media_cls(media) for media in data
+            ]
+            self.is_on_netflix = True
 
         super(PersonWithMedia, self)._populate()
 

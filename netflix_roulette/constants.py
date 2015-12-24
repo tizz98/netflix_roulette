@@ -1,5 +1,5 @@
 __author__ = 'Elijah <elijah@elijahwilson.me>'
-__version__ = '0.16'
+__version__ = '0.2'
 
 MOVIE_STR = 'Movie'
 TV_SHOW_STR = 'TV Show'
