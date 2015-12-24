@@ -2,6 +2,9 @@
 This is a simple python wrapper for the [Netflix Roulette API](http://netflixroulette.net/api/).
 
 [![Build Status](https://travis-ci.org/tizz98/netflix_roulette.svg?branch=master)](https://travis-ci.org/tizz98/netflix_roulette)
+[![PyPI version](https://img.shields.io/pypi/v/netflix_roulette.svg)](https://pypi.python.org/pypi/netflix_roulette)
+[![Python Versions](https://img.shields.io/pypi/pyversions/netflix_roulette.svg)](https://pypi.python.org/pypi/netflix_roulette)
+[![License](https://img.shields.io/pypi/l/netflix_roulette.svg)](https://github.com/tizz98/netflix_roulette/blob/master/LICENSE.md)
 
 ## Installation
 #### Pip
