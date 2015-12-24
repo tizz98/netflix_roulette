@@ -13,7 +13,7 @@ class Request(urllib.request.Request):
         kwargs = {}
 
         for k, v in self._kwargs.items():
-            if isinstance(v, basestring):
+            if isinstance(v, six.string_types):
                 kwargs[k] = six.u(v).encode('utf-8')
             elif isinstance(v, int):
                 kwargs[k] = v
