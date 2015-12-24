@@ -11,6 +11,7 @@ def on_netflix_movie_test():
 
 def not_on_netflix_movie_test():
     media = netflix_roulette.NetflixMedia('Home', year=2015)
+    print(media.__dict__)
     assert media.is_on_netflix is False
 
 
@@ -31,7 +32,7 @@ def movie_test_with_year_test():
 
 def unicode_title_test():
     # Make sure unicode is properly encoded
-    media = netflix_roulette.NetflixMedia(u'H βουλευτινα')
+    media = netflix_roulette.NetflixMedia('H βουλευτινα')
 
 
 def is_movie_func_test():

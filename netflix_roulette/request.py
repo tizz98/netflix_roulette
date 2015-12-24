@@ -1,22 +1,11 @@
 import six
 import json
+from six.moves import urllib
 
-if six.PY2:
-    from urllib2 import Request as UrllibRequest
-    from urllib2 import urlopen
-    from urllib2 import HTTPError
-    from urllib import urlencode
-elif six.PY3:
-    from urllib.request import Request as UrllibRequest
-    from urllib.request import urlopen
-    from urllib.error import HTTPError
-    from urllib.parse import urlencode
-    unicode = str
-
-from .exceptions import NetflixRouletteHTTPError
+from . import exceptions
 
 
-class Request(UrllibRequest):
+class Request(urllib.request.Request):
     _base_url = "http://netflixroulette.net/api/api.php"
 
     def __init__(self, **kwargs):
@@ -24,24 +13,28 @@ class Request(UrllibRequest):
         kwargs = {}
 
         for k, v in self._kwargs.items():
-            kwargs[k] = unicode(v).encode('utf-8')
+            if isinstance(v, basestring):
+                kwargs[k] = six.u(v).encode('utf-8')
+            elif isinstance(v, int):
+                kwargs[k] = v
 
-        url = '{0}?{1}'.format(self._base_url, urlencode(kwargs))
+        url = '{0}?{1}'.format(self._base_url, urllib.parse.urlencode(kwargs))
 
-        UrllibRequest.__init__(self, url)
+        urllib.request.Request.__init__(self, url)
         self.add_header('Accept', 'application/json')
         self.lifetime = 3600  # 1 hour
 
     def open(self):
         try:
-            return urlopen(self)
-        except HTTPError as e:
-            raise NetflixRouletteHTTPError(e)
+            return urllib.request.urlopen(self)
+        except urllib.error.HTTPError as e:
+            raise exceptions.NetflixRouletteHTTPError(e)
 
     def json(self):
         try:
-            data = json.loads(self.open().read().decode('utf-8'))
-        except NetflixRouletteHTTPError as e:
+            fp = self.open()
+            data = json.loads(fp.read().decode('utf-8'))
+        except exceptions.NetflixRouletteHTTPError as e:
             try:
                 data = json.loads(e.response)
             except:

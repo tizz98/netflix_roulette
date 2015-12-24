@@ -1,3 +1,6 @@
+import six
+
+
 class Element(object):
     __attrs__ = []
     repr_data_items = []
@@ -6,9 +9,9 @@ class Element(object):
         self._populate()
 
     def __repr__(self):
-        return u'<{0.__class__.__name__} {1}>'.format(
-            self, u' '.join([u"{0}='{1}'".format(k, getattr(self, k, None))
-                             for k in self.repr_data_items]),
+        return six.u('<{0.__class__.__name__} {1}>').format(
+            self, six.u(' ').join([six.u("{0}='{1}'").format(
+                k, getattr(self, k, None)) for k in self.repr_data_items]),
         ).encode('utf-8')
 
     def _populate(self):
