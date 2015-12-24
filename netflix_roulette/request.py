@@ -36,8 +36,8 @@ class Request(urllib.request.Request):
             data = json.loads(fp.read().decode('utf-8'))
         except exceptions.NetflixRouletteHTTPError as e:
             try:
-                data = json.loads(e.response)
-            except:
-                raise e
+                data = json.loads(e.response.decode('utf-8'))
+            except Exception as e:
+                raise exceptions.NetflixRouletteError(e)
 
         return data
