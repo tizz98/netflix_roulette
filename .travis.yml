@@ -9,4 +9,4 @@ install:
     - "pip install ."
 script:
   - "flake8 --exclude=__init__.py netflix_roulette"
-  - "py.test tests/media.py tests/person.py"
+  - "py.test tests"
