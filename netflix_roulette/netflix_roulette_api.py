@@ -62,7 +62,7 @@ class NetflixMedia(Element):
 
 
 class PersonWithMedia(Element):
-    __attrs__ = ['media']
+    __attrs__ = ['media', 'is_on_netflix']
 
     repr_data_items = [
         'name',
@@ -80,9 +80,13 @@ class PersonWithMedia(Element):
         response = Request(**{self.url_query_param: self.name})
         data = response.json()
 
-        self.media = [
-            self.media_cls(media) for media in data
-        ]
+        if 'errorcode' in data:
+            self.media = []
+            self.is_on_netflix = False
+        else:
+            self.media = [
+                self.media_cls(media) for media in data
+            ]
 
         super(PersonWithMedia, self)._populate()
 

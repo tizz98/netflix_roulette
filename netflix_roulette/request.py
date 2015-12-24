@@ -13,10 +13,12 @@ class Request(urllib.request.Request):
         kwargs = {}
 
         for k, v in self._kwargs.items():
-            if isinstance(v, six.string_types):
-                kwargs[k] = six.u(v).encode('utf-8')
-            elif isinstance(v, int):
-                kwargs[k] = v
+            # Make sure we only encode strings but NOT unicode
+            if not isinstance(v, six.text_type) \
+               and isinstance(v, six.string_types):
+                v = six.u(v).encode('utf-8')
+
+            kwargs[k] = v
 
         url = '{0}?{1}'.format(self._base_url, urllib.parse.urlencode(kwargs))
 

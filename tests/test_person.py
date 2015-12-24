@@ -16,6 +16,12 @@ def test_director_movies():
         assert media._data_set is True
 
 
+def test_director_not_on_netflix():
+    director = netflix_roulette.NetflixDirector('Quinten Tarentino')
+    assert director.media == []
+    assert director.is_on_netflix is False
+
+
 def test_actor_name():
     actor = netflix_roulette.NetflixActor('Nicolas Cage')
     assert actor.name == 'Nicolas Cage'
