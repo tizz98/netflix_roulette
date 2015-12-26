@@ -3,6 +3,9 @@ import netflix_roulette
 from netflix_roulette.constants import TV_SHOW_STR, MOVIE_STR
 
 
+netflix_roulette.Request._base_url = 'http://127.0.0.1:5000/api/api.php'
+
+
 # Note: testing with specific media will prove to not be reliable
 def test_on_netflix_movie():
     media = netflix_roulette.NetflixMedia('The Avengers')
