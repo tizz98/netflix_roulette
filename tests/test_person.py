@@ -2,6 +2,9 @@
 import netflix_roulette
 
 
+netflix_roulette.Request._base_url = 'http://127.0.0.1:5000/api/api.php'
+
+
 def test_director_name():
     director = netflix_roulette.NetflixDirector('Quentin Tarantino')
     assert director.name == 'Quentin Tarantino'
